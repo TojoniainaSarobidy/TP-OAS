@@ -1,0 +1,15 @@
+openapi: 3.0.3
+info:
+  title: My Ping API
+  version: 1.0.1
+paths:
+  /ping:
+    get:
+      responses:
+        '200':
+          description: Pong response
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: pong
