@@ -1,0 +1,130 @@
+/tasks:
+  get:
+    summary: Récupère une liste de tâches
+    responses:
+      "200":
+        description: Liste des tâches
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/Task"
+            example:
+              - id: 1
+                title: Faire les courses
+                completed: false
+              - id: 2
+                title: Envoyer un email
+                completed: true
+
+  post:
+    summary: Crée une liste de tâches
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/Task"
+          example:
+            - title: Faire les courses
+              completed: false
+            - title: Envoyer un email
+              completed: true
+    responses:
+      "201":
+        description: Tâches créées
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/Task"
+            example:
+              - id: 1
+                title: Faire les courses
+                completed: false
+              - id: 2
+                title: Envoyer un email
+                completed: true
+
+  delete:
+    summary: Supprime une liste de tâches
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: integer
+          example:
+            - 1
+            - 2
+    responses:
+      "200":
+        description: Tâches supprimées
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/Task"
+            example:
+              - id: 1
+                title: Faire les courses
+                completed: false
+              - id: 2
+                title: Envoyer un email
+                completed: true
+
+/tasks/{id}:
+  get:
+    summary: Récupère une tâche par ID
+    parameters:
+      - $ref: "#/components/parameters/Id"
+    responses:
+      "200":
+        description: Tâche trouvée
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Task"
+            example:
+              id: 1
+              title: Faire les courses
+              completed: false
+      "404":
+        description: Tâche non trouvée
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+            example:
+              error: Task not found
+
+  delete:
+    summary: Supprime une tâche par ID
+    parameters:
+      - $ref: "#/components/parameters/Id"
+    responses:
+      "200":
+        description: Tâche supprimée
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Task"
+            example:
+              id: 1
+              title: Faire les courses
+              completed: false
+      "404":
+        description: Tâche non trouvée
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+            example:
+              error: Task not found
