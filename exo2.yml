@@ -1,0 +1,30 @@
+/users:
+  get:
+    summary: Récupère une liste d'utilisateurs paginée
+    parameters:
+      - $ref: "#/components/parameters/Page"
+      - $ref: "#/components/parameters/Size"
+    responses:
+      "200":
+        description: Liste des utilisateurs
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/User"
+            example:
+              - id: 1
+                name: Alice
+                email: alice@example.com
+              - id: 2
+                name: Bob
+                email: bob@example.com
+      "400":
+        description: Mauvais types de paramètres
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+            example:
+              error: Bad types forprovided query parameters
